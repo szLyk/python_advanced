@@ -40,10 +40,10 @@ def fibonacci(n):
 # ============================================================
 
 # 列表推导式
-squares_list = [x**2 for x in range(10)]
+squares_list = [x ** 2 for x in range(10)]
 
 # 生成器表达式（更省内存）
-squares_gen = (x**2 for x in range(10))
+squares_gen = (x ** 2 for x in range(10))
 
 
 # ============================================================
@@ -72,5 +72,6 @@ def read_large_file(file_path):
 # ============================================================
 
 if __name__ == "__main__":
-    print("Day 2: 生成器学习内容（待完成）")
-    print("请参考学习计划完成练习")
+    gen = fibonacci(5)
+    for num in gen:
+        print(num)
