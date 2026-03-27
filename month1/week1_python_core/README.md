@@ -13,7 +13,7 @@
 |------|------|------|------|
 | Day 1 | 装饰器 | day1_decorator/decorator_practice.py | ✅ |
 | Day 2 | 生成器 | day2_generator/generator_practice.py | ✅ |
-| Day 3 | 上下文管理器 | day3_context_manager/context_manager.py | ⬜ |
+| Day 3 | 上下文管理器 | day3_context_manager/context_manager.py | ✅ |
 | Day 4 | 异步编程 | day4_async/async_basic.py | ⬜ |
 | Day 5 | 弹性/休息 | - | - |
 | Day 6 | 综合项目 | day6_project/async_crawler.py | ⬜ |
