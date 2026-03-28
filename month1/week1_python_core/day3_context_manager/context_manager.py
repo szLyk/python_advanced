@@ -139,12 +139,48 @@ def timer_context(name="代码块"):
 
 @contextmanager
 def temporary_state(obj, attr, new_value):
-    """临时修改对象属性"""
+    """
+    临时修改对象属性，退出 with 时自动恢复原值
+    
+    参数:
+        obj: 目标对象
+        attr: 属性名（字符串）
+        new_value: 临时设置的新值
+    
+    返回:
+        原来的属性值
+    
+    示例:
+        class Config:
+            debug = False
+        
+        config = Config()
+        with temporary_state(config, "debug", True):
+            # 在 with 块内，config.debug = True
+            process_data()
+        # 退出后，config.debug 自动恢复为 False
+    """
+    # ========== __enter__ 部分（进入 with 块之前执行）==========
+    
+    # 1. 获取并保存原来的属性值
     old_value = getattr(obj, attr)
+    
+    # 2. 设置新的属性值
     setattr(obj, attr, new_value)
+    
+    # 3. 打印日志，显示属性修改
     print(f"[temporary_state] {attr}: {old_value} -> {new_value}")
+    
+    # 4. yield 返回旧值给 with 语句（相当于 __enter__ 的返回值）
+    #    with temporary_state(...) as old_val: 中的 old_val 就是这里
     yield old_value
+    
+    # ========== __exit__ 部分（离开 with 块之后执行）==========
+    
+    # 5. 恢复原来的属性值（无论是否发生异常都会执行）
     setattr(obj, attr, old_value)
+    
+    # 6. 打印日志，显示属性恢复
     print(f"[temporary_state] {attr}: {new_value} -> {old_value} (恢复)")
 
 
