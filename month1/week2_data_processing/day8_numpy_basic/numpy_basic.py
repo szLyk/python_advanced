@@ -1,326 +1,263 @@
 """
-Day 8: NumPy 基础
+Day 8: NumPy 基础练习
 
-学习目标：
-1. 理解 NumPy ndarray 数组
-2. 掌握数组创建方法
-3. 学会数组索引和切片
-4. 理解广播机制
-5. 掌握基本数组运算
-
-作者：AI Agent 工程师学习者
-日期：2026-03-30
+练习内容：
+1. ndarray 创建与属性
+2. 数据类型与形状操作
+3. 索引与切片
+4. 广播机制
+5. 数学运算
+6. 股票场景应用
 """
 
 import numpy as np
 
 
-# ============================================================
-# 1. 创建数组
-# ============================================================
-
-def demo_array_creation():
-    """演示数组创建"""
+def section_1_array_creation():
+    """练习 1: ndarray 创建与属性"""
     print("=" * 50)
-    print("1. 数组创建")
+    print("练习 1: ndarray 创建与属性")
     print("=" * 50)
 
-    # 从列表创建
-    print("\n--- 从列表创建 ---")
-    arr1 = np.array([1, 2, 3, 4, 5])
-    arr2 = np.array([[1, 2, 3], [4, 5, 6]])
-    print(f"一维数组: {arr1}")
-    print(f"二维数组:\n{arr2}")
+    # 一维数组
+    a = np.array([1, 2, 3, 4, 5])
+    print(f"一维数组: {a}")
+    print(f"  shape: {a.shape}, dtype: {a.dtype}, ndim: {a.ndim}, size: {a.size}")
 
-    # 内置函数创建
-    print("\n--- 内置函数创建 ---")
-    zeros = np.zeros((3, 4))
-    ones = np.ones((2, 3))
-    eye = np.eye(3)
-    print(f"zeros(3,4):\n{zeros}")
-    print(f"ones(2,3):\n{ones}")
-    print(f"eye(3):\n{eye}")
+    # 二维数组
+    b = np.array([[1, 2, 3], [4, 5, 6]])
+    print(f"二维数组:\n{b}")
+    print(f"  shape: {b.shape}, dtype: {b.dtype}, ndim: {b.ndim}, size: {b.size}")
 
-    # 等差/等分
-    print("\n--- 等差/等分 ---")
-    arange_arr = np.arange(0, 10, 2)
-    linspace_arr = np.linspace(0, 1, 5)
-    print(f"arange(0,10,2): {arange_arr}")
-    print(f"linspace(0,1,5): {linspace_arr}")
+    # 常用创建方法
+    print(f"\nnp.zeros((3, 4)):\n{np.zeros((3, 4))}")
+    print(f"\nnp.ones((2, 3)):\n{np.ones((2, 3))}")
+    print(f"\nnp.arange(0, 10, 2): {np.arange(0, 10, 2)}")
+    print(f"\nnp.linspace(0, 1, 5): {np.linspace(0, 1, 5)}")
 
     # 随机数组
-    print("\n--- 随机数组 ---")
-    random_arr = np.random.rand(3, 3)
-    random_int = np.random.randint(0, 10, size=(3, 3))
-    print(f"rand(3,3):\n{random_arr}")
-    print(f"randint(0,10,3,3):\n{random_int}")
+    print(f"\nnp.random.rand(3, 2) (均匀分布):\n{np.random.rand(3, 2)}")
+    print(f"\nnp.random.randn(3) (正态分布): {np.random.randn(3)}")
+    print(f"\nnp.random.randint(0, 100, 5): {np.random.randint(0, 100, 5)}")
 
 
-# ============================================================
-# 2. 数组属性
-# ============================================================
-
-def demo_array_attributes():
-    """演示数组属性"""
+def section_2_dtype_and_shape():
+    """练习 2: 数据类型与形状操作"""
     print("\n" + "=" * 50)
-    print("2. 数组属性")
+    print("练习 2: 数据类型与形状操作")
     print("=" * 50)
 
-    arr = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+    # 指定数据类型
+    a = np.array([1, 2, 3], dtype=np.float32)
+    print(f"指定 dtype=float32: {a}, dtype: {a.dtype}")
 
-    print(f"数组:\n{arr}")
-    print(f"shape (形状): {arr.shape}")
-    print(f"ndim (维度数): {arr.ndim}")
-    print(f"size (元素总数): {arr.size}")
-    print(f"dtype (数据类型): {arr.dtype}")
-    print(f"itemsize (元素字节): {arr.itemsize}")
-    print(f"nbytes (总字节): {arr.nbytes}")
+    b = np.array([1.5, 2.7, 3.9], dtype=np.int32)
+    print(f"指定 dtype=int32: {b}, dtype: {b.dtype}")
 
+    # 类型转换
+    c = np.array([1, 2, 3])
+    d = c.astype(np.float64)
+    print(f"astype float64: {d}, dtype: {d.dtype}")
 
-# ============================================================
-# 3. 数组索引和切片
-# ============================================================
+    # 形状操作
+    e = np.arange(12)
+    print(f"\n原始数组: {e}, shape: {e.shape}")
 
-def demo_indexing():
-    """演示索引和切片"""
-    print("\n" + "=" * 50)
-    print("3. 数组索引和切片")
-    print("=" * 50)
+    f = e.reshape(3, 4)
+    print(f"reshape(3, 4):\n{f}")
 
-    # 一维数组索引
-    print("\n--- 一维数组 ---")
-    arr = np.array([10, 20, 30, 40, 50])
-    print(f"数组: {arr}")
-    print(f"arr[0]: {arr[0]}")
-    print(f"arr[-1]: {arr[-1]}")
-    print(f"arr[1:4]: {arr[1:4]}")
-    print(f"arr[::2]: {arr[::2]}")
+    g = e.reshape(2, 6)
+    print(f"reshape(2, 6):\n{g}")
 
-    # 二维数组索引
-    print("\n--- 二维数组 ---")
-    arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-    print(f"数组:\n{arr}")
-    print(f"arr[0, 0]: {arr[0, 0]}")
-    print(f"arr[1, 2]: {arr[1, 2]}")
-    print(f"arr[:, 0] (第一列): {arr[:, 0]}")
-    print(f"arr[0, :] (第一行): {arr[0, :]}")
-    print(f"arr[0:2, 1:3]:\n{arr[0:2, 1:3]}")
-
-    # 布尔索引
-    print("\n--- 布尔索引 ---")
-    arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    print(f"数组: {arr}")
-    print(f"arr > 5: {arr[arr > 5]}")
-    print(f"偶数: {arr[arr % 2 == 0]}")
-    print(f"3-8之间: {arr[(arr > 3) & (arr < 8)]}")
-
-
-# ============================================================
-# 4. 数组运算
-# ============================================================
-
-def demo_operations():
-    """演示数组运算"""
-    print("\n" + "=" * 50)
-    print("4. 数组运算")
-    print("=" * 50)
-
-    # 基本运算
-    print("\n--- 基本运算 ---")
-    arr = np.array([1, 2, 3, 4, 5])
-    print(f"数组: {arr}")
-    print(f"arr + 10: {arr + 10}")
-    print(f"arr * 2: {arr * 2}")
-    print(f"arr ** 2: {arr ** 2}")
-
-    # 数组间运算
-    print("\n--- 数组间运算 ---")
-    arr1 = np.array([1, 2, 3])
-    arr2 = np.array([4, 5, 6])
-    print(f"arr1: {arr1}, arr2: {arr2}")
-    print(f"arr1 + arr2: {arr1 + arr2}")
-    print(f"arr1 * arr2: {arr1 * arr2}")
-
-    # 数学函数
-    print("\n--- 数学函数 ---")
-    arr = np.array([1, 2, 3, 4, 5])
-    print(f"sqrt: {np.sqrt(arr)}")
-    print(f"exp: {np.exp(arr)}")
-    print(f"log: {np.log(arr)}")
-
-    # 统计函数
-    print("\n--- 统计函数 ---")
-    arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    print(f"数组: {arr}")
-    print(f"sum: {np.sum(arr)}")
-    print(f"mean: {np.mean(arr)}")
-    print(f"std: {np.std(arr):.4f}")
-    print(f"max: {np.max(arr)}, min: {np.min(arr)}")
-    print(f"argmax: {np.argmax(arr)}, argmin: {np.argmin(arr)}")
-    print(f"cumsum: {np.cumsum(arr)}")
-
-
-# ============================================================
-# 5. 广播机制
-# ============================================================
-
-def demo_broadcasting():
-    """演示广播机制"""
-    print("\n" + "=" * 50)
-    print("5. 广播机制")
-    print("=" * 50)
-
-    # 二维 + 一维
-    print("\n--- 二维 + 一维 ---")
-    matrix = np.array([[1, 2, 3], [4, 5, 6]])
-    vector = np.array([10, 20, 30])
-    print(f"matrix shape: {matrix.shape}")
-    print(f"vector shape: {vector.shape}")
-    result = matrix + vector
-    print(f"结果:\n{result}")
-
-    # 行广播
-    print("\n--- 行广播 ---")
-    matrix = np.array([[1, 2, 3], [4, 5, 6]])
-    row = np.array([[10], [20]])
-    print(f"matrix shape: {matrix.shape}")
-    print(f"row shape: {row.shape}")
-    result = matrix + row
-    print(f"结果:\n{result}")
-
-    # 列广播
-    print("\n--- 列广播 ---")
-    matrix = np.array([[1, 2, 3], [4, 5, 6]])
-    col = np.array([100, 200])
-    result = matrix + col.reshape(2, 1)
-    print(f"结果:\n{result}")
-
-
-# ============================================================
-# 6. 数组形状操作
-# ============================================================
-
-def demo_shape_operations():
-    """演示形状操作"""
-    print("\n" + "=" * 50)
-    print("6. 数组形状操作")
-    print("=" * 50)
-
-    # reshape
-    print("\n--- reshape ---")
-    arr = np.arange(12)
-    print(f"原数组: {arr}")
-    reshaped = arr.reshape(3, 4)
-    print(f"reshape(3,4):\n{reshaped}")
-    reshaped_auto = arr.reshape(2, -1)
-    print(f"reshape(2,-1):\n{reshaped_auto}")
+    # flatten
+    h = f.flatten()
+    print(f"flatten: {h}")
 
     # transpose
-    print("\n--- transpose ---")
-    arr = np.array([[1, 2, 3], [4, 5, 6]])
-    print(f"原数组:\n{arr}")
-    print(f"转置:\n{arr.T}")
+    print(f"\n原始 3x4:\n{f}")
+    print(f"transpose (4x3):\n{f.T}")
 
-    # flatten vs ravel
-    print("\n--- flatten vs ravel ---")
-    arr = np.array([[1, 2, 3], [4, 5, 6]])
-    flat = arr.flatten()
-    rav = arr.ravel()
-    print(f"flatten: {flat}")
-    print(f"ravel: {rav}")
+    # resize vs reshape
+    print(f"\nreshape 只返回视图，resize 改变原数组")
+    i = np.arange(6)
+    i.resize(2, 3)
+    print(f"resize 后: {i}")
 
 
-# ============================================================
-# 7. 实用函数
-# ============================================================
-
-def demo_utility_functions():
-    """演示实用函数"""
+def section_3_indexing_and_slicing():
+    """练习 3: 索引与切片"""
     print("\n" + "=" * 50)
-    print("7. 实用函数")
+    print("练习 3: 索引与切片")
     print("=" * 50)
 
-    # where
-    print("\n--- where ---")
-    arr = np.array([1, 2, 3, 4, 5])
-    result = np.where(arr > 3, arr, 0)
-    print(f"arr > 3 替换为 arr, 否则 0: {result}")
+    a = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+    print(f"数组:\n{a}")
 
-    # unique
-    print("\n--- unique ---")
-    arr = np.array([1, 2, 2, 3, 3, 3, 4, 4, 5])
-    unique, counts = np.unique(arr, return_counts=True)
-    print(f"唯一值: {unique}")
-    print(f"计数: {counts}")
+    # 基本索引
+    print(f"\na[0, 1] (第0行第1列): {a[0, 1]}")
+    print(f"a[2, 3] (第2行第3列): {a[2, 3]}")
 
-    # sort
-    print("\n--- sort ---")
-    arr = np.array([3, 1, 4, 1, 5, 9, 2, 6])
-    sorted_arr = np.sort(arr)
-    indices = np.argsort(arr)
-    print(f"原数组: {arr}")
-    print(f"排序后: {sorted_arr}")
-    print(f"排序索引: {indices}")
+    # 切片
+    print(f"\na[0, :] (第0行全部): {a[0, :]}")
+    print(f"a[:, 0] (第0列全部): {a[:, 0]}")
+    print(f"a[1:3, 1:3] (行1-2,列1-2):\n{a[1:3, 1:3]}")
 
-    # concatenate
-    print("\n--- concatenate ---")
-    arr1 = np.array([1, 2, 3])
-    arr2 = np.array([4, 5, 6])
-    combined = np.concatenate([arr1, arr2])
-    print(f"arr1: {arr1}, arr2: {arr2}")
-    print(f"连接: {combined}")
+    # 布尔索引（重点！股票场景常用）
+    prices = np.array([10, 15, 8, 20, 12, 25, 18])
+    print(f"\n价格数组: {prices}")
+    print(f"价格 > 15: {prices[prices > 15]}")
+    print(f"价格 < 12: {prices[prices < 12]}")
+    print(f"价格在 12-20 之间: {prices[(prices >= 12) & (prices <= 20)]}")
+
+    # 花式索引
+    print(f"\n花式索引 a[[0, 2], [1, 3]]: {a[[0, 2], [1, 3]]}")
+    print(f"a[[0, 1], :] (取第0和第1行):\n{a[[0, 1], :]}")
 
 
-# ============================================================
-# 8. 性能对比
-# ============================================================
-
-def demo_performance():
-    """演示 NumPy vs Python 列表性能"""
+def section_4_broadcasting():
+    """练习 4: 广播机制"""
     print("\n" + "=" * 50)
-    print("8. 性能对比: NumPy vs Python 列表")
+    print("练习 4: 广播机制")
     print("=" * 50)
 
-    import time
+    # 案例 1: 二维 + 一维
+    a = np.array([[1, 2, 3], [4, 5, 6]])  # shape: (2, 3)
+    b = np.array([10, 20, 30])            # shape: (3,)
+    print(f"a (2x3):\n{a}")
+    print(f"b (1x3): {b}")
+    print(f"a + b (广播结果):\n{a + b}")
 
-    n = 1000000
+    # 案例 2: 列向量广播
+    c = np.array([[1], [2], [3]])  # shape: (3, 1)
+    d = np.array([10, 20])         # shape: (2,)
+    print(f"\nc (3x1):\n{c}")
+    print(f"d (2): {d}")
+    print(f"c + d (广播结果):\n{c + d}")
 
-    # Python 列表
-    start = time.time()
-    py_list = list(range(n))
-    py_result = [x * 2 for x in py_list]
-    py_time = time.time() - start
+    # 案例 3: 标量广播
+    e = np.array([1, 2, 3, 4, 5])
+    print(f"\ne: {e}")
+    print(f"e * 10 (标量广播): {e * 10}")
+    print(f"e + 100: {e + 100}")
 
-    # NumPy
-    start = time.time()
-    np_arr = np.arange(n)
-    np_result = np_arr * 2
-    np_time = time.time() - start
-
-    print(f"元素数量: {n}")
-    print(f"Python 列表时间: {py_time:.4f}s")
-    print(f"NumPy 数组时间: {np_time:.4f}s")
-    print(f"NumPy 快了: {py_time / np_time:.2f} 倍")
+    # 广播规则解释
+    print("\n广播规则:")
+    print("1. 维度从右对齐")
+    print("2. 对应维度相等或其中一个为1")
+    print("3. 为1的维度会广播扩展")
 
 
-# ============================================================
-# 主程序
-# ============================================================
+def section_5_math_operations():
+    """练习 5: 数学运算"""
+    print("\n" + "=" * 50)
+    print("练习 5: 数学运算")
+    print("=" * 50)
+
+    a = np.array([1, 2, 3, 4, 5])
+    b = np.array([10, 20, 30, 40, 50])
+
+    # 基本运算
+    print(f"a: {a}")
+    print(f"b: {b}")
+    print(f"a + b: {a + b}")
+    print(f"a - b: {a - b}")
+    print(f"a * b: {a * b}")
+    print(f"a / b: {a / b}")
+    print(f"a ** 2 (平方): {a ** 2}")
+
+    # 统计函数
+    c = np.array([10, 15, 12, 18, 14, 20, 16])
+    print(f"\n数据: {c}")
+    print(f"sum: {c.sum()}")
+    print(f"mean: {c.mean():.2f}")
+    print(f"max: {c.max()}")
+    print(f"min: {c.min()}")
+    print(f"std (标准差): {c.std():.2f}")
+    print(f"var (方差): {c.var():.2f}")
+
+    # 轴向统计
+    d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    print(f"\n二维数组:\n{d}")
+    print(f"sum(axis=0) 每列求和: {d.sum(axis=0)}")
+    print(f"sum(axis=1) 每行求和: {d.sum(axis=1)}")
+    print(f"mean(axis=0) 每列均值: {d.mean(axis=0)}")
+
+    # 数学函数
+    e = np.array([1, 2, 3, 4])
+    print(f"\n数学函数:")
+    print(f"np.sqrt({e}): {np.sqrt(e)}")
+    print(f"np.exp({e}): {np.exp(e)}")
+    print(f"np.log({e}): {np.log(e)}")
+    print(f"np.abs([-1, -2, -3]): {np.abs(np.array([-1, -2, -3]))}")
+
+    # 比较运算
+    f = np.array([10, 15, 12, 18, 14])
+    print(f"\n比较运算:")
+    print(f"f > 13: {f > 13}")
+    print(f"f == 12: {f == 12}")
+    print(f"(f > 12) & (f < 16): {(f > 12) & (f < 16)}")
+
+
+def section_6_stock_application():
+    """练习 6: 股票场景应用"""
+    print("\n" + "=" * 50)
+    print("练习 6: 股票场景应用")
+    print("=" * 50)
+
+    # 模拟 7 天股价
+    prices = np.array([10.5, 11.2, 10.8, 12.0, 11.5, 13.0, 12.8])
+    print(f"7天股价: {prices}")
+
+    # 涨跌幅计算
+    changes = (prices[1:] - prices[:-1]) / prices[:-1] * 100
+    print(f"涨跌幅(%): {changes}")
+
+    # 筛选大涨大跌
+    big_up = changes[changes > 2]
+    big_down = changes[changes < -2]
+    print(f"涨幅>2%的天数: {big_up}")
+    print(f"跌幅<-2%的天数: {big_down}")
+
+    # 基础统计
+    print(f"\n基础统计:")
+    print(f"  平均价格: {prices.mean():.2f}")
+    print(f"  最高价: {prices.max():.2f}")
+    print(f"  最低价: {prices.min():.2f}")
+    print(f"  波动率(标准差): {prices.std():.2f}")
+    print(f"  价格区间: {prices.max() - prices.min():.2f}")
+
+    # 模拟成交量
+    volumes = np.array([1000, 1200, 800, 1500, 1100, 2000, 1800])
+    print(f"\n成交量: {volumes}")
+    print(f"  平均成交量: {volumes.mean():.0f}")
+    print(f"  最大成交量: {volumes.max()}")
+    print(f"  成交量>1500的天数股价: {prices[volumes > 1500]}")
+
+    # 多维数据：模拟3只股票5天价格
+    multi_prices = np.array([
+        [10.5, 11.0, 10.8, 12.0, 11.5],  # 股票A
+        [20.0, 21.5, 19.8, 22.0, 21.0],  # 股票B
+        [5.0, 5.2, 4.8, 5.5, 5.3],       # 股票C
+    ])
+    print(f"\n3只股票5天价格:\n{multi_prices}")
+    print(f"每只股票均价: {multi_prices.mean(axis=1)}")
+    print(f"每天市场均价: {multi_prices.mean(axis=0)}")
+    print(f"每只股票最大波动(最高-最低): {multi_prices.max(axis=1) - multi_prices.min(axis=1)}")
+
+
+def main():
+    """运行所有练习"""
+    section_1_array_creation()
+    section_2_dtype_and_shape()
+    section_3_indexing_and_slicing()
+    section_4_broadcasting()
+    section_5_math_operations()
+    section_6_stock_application()
+
+    print("\n" + "=" * 50)
+    print("✅ Day 8 NumPy 基础练习完成！")
+    print("=" * 50)
+
 
 if __name__ == "__main__":
-    print("=" * 60)
-    print("Day 8: NumPy 基础完整示例")
-    print("=" * 60)
-
-    demo_array_creation()
-    demo_array_attributes()
-    demo_indexing()
-    demo_operations()
-    demo_broadcasting()
-    demo_shape_operations()
-    demo_utility_functions()
-    demo_performance()
-
-    print("\n" + "=" * 60)
-    print("所有示例运行完成！")
-    print("=" * 60)
+    main()
