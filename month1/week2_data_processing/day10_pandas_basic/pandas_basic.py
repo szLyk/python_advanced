@@ -45,7 +45,7 @@ def demo_series():
     # Series 索引
     print("\n--- Series 索引 ---")
     print(f"s['a']: {s['a']}")
-    print(f"s[0]: {s[0]}")
+    print(f"s.iloc[0]: {s.iloc[0]}  # 使用 iloc 按位置索引")
     print(f"s[['a', 'c']]:\n{s[['a', 'c']]}")
 
 
