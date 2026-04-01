@@ -428,8 +428,8 @@ class NewsFetcher:
                 except Exception as e:
                     print(f"[API] {api_name} 请求失败: {e}")
 
-        # 2. 获取 RSS 数据
-        rss_sources = ['bbc_business', 'cnbc_markets', 'marketwatch']  # 可添加更多
+        # 2. 获取 RSS 数据（按优先级排序）
+        rss_sources = ['reuters_via_google', 'google_business', 'bbc_business', 'cnbc_markets', 'marketwatch', 'reuters_rssapp']
         for rss_name in rss_sources:
             if rss_name in RSS_SOURCES:
                 print(f"[RSS] 正在获取 {RSS_SOURCES[rss_name]['name']}...")

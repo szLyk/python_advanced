@@ -34,6 +34,9 @@ API_KEYS = {
     'gnews': os.getenv('GNEWS_API_KEY', ''),
 }
 
+# RSS.app 自定义源（从 .env 读取）
+RSS_APP_REUTERS_URL = os.getenv('RSS_APP_REUTERS_URL', '')
+
 # API 端点
 API_ENDPOINTS = {
     'newsapi': 'https://newsapi.org/v2/everything',
@@ -41,26 +44,43 @@ API_ENDPOINTS = {
 }
 
 # RSS 源配置
+# 主要源：Google News RSS（稳定可靠）
+# 备用源：rss.app（第三方聚合，偶发不稳定）
 RSS_SOURCES = {
-    'reuters_business': {
-        'url': 'https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best',
-        'name': 'Reuters Business',
+    # === 主要源（优先使用）===
+    'reuters_via_google': {
+        # 路透社官方 RSS 已废弃，使用 Google News 过滤路透社新闻
+        'url': 'https://news.google.com/rss/search?q=reuters+business&hl=en-US&gl=US&ceid=US:en',
+        'name': 'Reuters (via Google News)',
+        'priority': 1,
+    },
+    'google_business': {
+        # Google News 商业新闻聚合
+        'url': 'https://news.google.com/rss/search?q=stock+market+finance&hl=en-US&gl=US&ceid=US:en',
+        'name': 'Google News Business',
+        'priority': 1,
     },
     'bbc_business': {
         'url': 'https://feeds.bbci.co.uk/news/business/rss.xml',
         'name': 'BBC Business',
+        'priority': 2,
     },
     'cnbc_markets': {
         'url': 'https://www.cnbc.com/id/10000664/device/rss/rss.html',
         'name': 'CNBC Markets',
+        'priority': 2,
     },
     'marketwatch': {
         'url': 'https://www.marketwatch.com/rss/topstories',
         'name': 'MarketWatch',
+        'priority': 2,
     },
-    'yahoo_finance': {
-        'url': 'https://finance.yahoo.com/rss/',
-        'name': 'Yahoo Finance',
+    # === 备用源（网络不稳定时可能失败）===
+    'reuters_rssapp': {
+        # rss.app 自定义聚合的路透社财经新闻（URL 从 .env 读取）
+        'url': RSS_APP_REUTERS_URL if RSS_APP_REUTERS_URL else 'https://rss.app/feeds/EtHhREsCL5E9uxbA.xml',
+        'name': 'Reuters Finance (rss.app)',
+        'priority': 3,
     },
 }
 
