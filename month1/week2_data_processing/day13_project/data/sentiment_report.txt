@@ -1,0 +1,49 @@
+==================================================
+股票新闻情绪分析报告
+==================================================
+生成时间: 2026-04-01 01:31:29
+
+一、数据概要
+----------------------------------------
+总新闻数: 10
+日期范围: 2026-03-23 至 2026-03-30
+新闻来源: 1 个
+
+二、情绪统计
+----------------------------------------
+平均情绪分数: -0.074
+情绪标准差: 0.431
+最高情绪分数: 0.627
+最低情绪分数: -0.660
+
+正面新闻数: 3 (30.0%)
+负面新闻数: 5 (50.0%)
+中性新闻数: 2
+
+三、趋势分析
+----------------------------------------
+情绪趋势: 改善 (后半期比前半期高 0.421)
+
+四、来源分析
+----------------------------------------
+gnews: 10 条新闻, 平均情绪 -0.074
+
+五、典型新闻
+----------------------------------------
+最正面新闻:
+  [0.627] Sensex Today | Stock Market Live: Sensex soars 1,200 pts, Nifty reclaims 23,300; broader markets rally
+  [0.417] Shares to buy or sell: Ruchit Jain of Motilal Oswal recommends Bajaj Finance, Granules stock to buy today - 25 March
+  [0.300] Top stocks to buy: Stock recommendations for March 30, 2026 week
+
+最负面新闻:
+  [-0.660] Stock Market Crash: Rs 13 Lakh Crore Gone; What Triggered Today’s Wealth Wipeout Amid Iran War?
+  [-0.656] Stock Market Close: Sensex Crashes Over 1,830 Points, Nifty Tests 22,548; What's Leading The Fall
+  [-0.331] Stock Market News Today: Sensex Crashes 850 Points, Nifty Slips Below 23,100 - Tata Steel, Bajaj Finance Drop 2% Each
+
+六、分析结论
+----------------------------------------
+整体市场情绪中性，投资者观望态度明显。
+
+==================================================
+报告结束
+==================================================
