@@ -42,4 +42,28 @@ Thumbs.db
 
 # Local config
 .env
+.env.local
+.env.*.local
 *.local
+config.local.py
+settings.local.py
+
+# API Keys and Credentials
+api_key.txt
+keys.txt
+credentials.json
+serviceAccount.json
+.secret
+*password*
+
+# Data files (may contain sensitive info)
+*.csv
+*.json
+!data/.gitkeep
+
+# Milvus data
+milvus_data/
+
+# Reports
+evaluation_report.md
+*.md.local
