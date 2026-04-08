@@ -2,7 +2,7 @@
 
 **状态：** 🔄 进行中
 
-**当前进度**：Day 15 FastAPI 基础
+**当前进度**：Day 16 Pydantic 验证（2026-04-09）
 
 ## 学习目标
 
@@ -10,9 +10,9 @@
 
 ## 知识点清单
 
-- [ ] RESTful API 设计原则
-- [ ] FastAPI 路由和请求处理
-- [ ] Pydantic 数据验证
+- [x] RESTful API 设计原则
+- [x] FastAPI 路由和请求处理
+- [x] Pydantic 数据验证
 - [ ] SQLAlchemy ORM 操作
 - [ ] JWT 认证机制
 - [ ] API 权限控制
@@ -21,8 +21,8 @@
 
 | 天数 | 主题 | 文件 | 状态 |
 |------|------|------|------|
-| Day 15 | FastAPI 基础 | day15_fastapi_basic/ | 🔄 |
-| Day 16 | Pydantic 验证 | day16_pydantic/ | ⏳ |
+| Day 15 | FastAPI 基础 | day15_fastapi_basic/ | ✅ |
+| Day 16 | Pydantic 验证 | day16_pydantic/ | ✅ |
 | Day 17 | SQLAlchemy ORM | day17_sqlalchemy/ | ⏳ |
 | Day 18 | JWT 认证 | day18_jwt_auth/ | ⏳ |
 | Day 19 | 弹性/休息 | - | - |

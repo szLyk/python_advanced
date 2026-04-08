@@ -7,7 +7,7 @@
 **前置基础**：大数据开发（Java/Scala），Python 懂但不熟悉
 **最终能力**：能够独立开发 AI Agent 应用、RAG 系统、多 Agent 协作系统
 
-**当前进度**：Month 1 Week 3 Day 15（2026-04-08）
+**当前进度**：Month 1 Week 3 Day 17（2026-04-09）
 
 ---
 
@@ -81,17 +81,17 @@
 
 | 天数 | 主题 | 学习内容 | 产出 | 状态 |
 |------|------|---------|------|------|
-| Day 15 | FastAPI 基础 | 路由、请求、响应 | fastapi_basic.py | 🔄 |
-| Day 16 | Pydantic | 数据验证、模型定义 | pydantic_validation.py | ⏳ |
-| Day 17 | SQLAlchemy | ORM、数据库连接 | sqlalchemy_crud.py | ⏳ |
+| Day 15 | FastAPI 基础 | 路由、请求、响应 | fastapi_basic.py | ✅ |
+| Day 16 | Pydantic | 数据验证、模型定义 | pydantic_validation.py | ✅ |
+| Day 17 | SQLAlchemy | ORM、数据库连接 | sqlalchemy_crud.py | 🔄 |
 | Day 18 | JWT 认证 | OAuth2、Token 认证 | jwt_auth.py | ⏳ |
 | Day 19 | 弹性/休息 | 复习/补进度 | - | - |
 | Day 20 | 综合项目 | 股票数据 API 服务 | stock_api_service/ | ⏳ |
 | Day 21 | 休息 | - | - | - |
 
 **核心知识点**：
-- [ ] RESTful API 设计
-- [ ] 请求验证和响应序列化
+- [x] RESTful API 设计
+- [x] 请求验证和响应序列化
 - [ ] 数据库 ORM 操作
 - [ ] JWT 认证流程
 

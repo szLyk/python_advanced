@@ -71,7 +71,54 @@ async def health_check():
 
 
 # ============================================
-# 5. CRUD 操作 - 股票管理
+# 5. 搜索功能（必须在 /stocks/{symbol} 之前定义）
+# ============================================
+
+@app.get("/stocks/search")
+async def search_stocks(
+        min_price: Optional[float] = Query(None, ge=0, description="最低价格"),
+        max_price: Optional[float] = Query(None, le=10000, description="最高价格"),
+        name_contains: Optional[str] = Query(None, description="名称包含")
+):
+    """
+    搜索股票
+
+    - 支持价格范围和名称搜索
+    """
+    results = list(stocks_db.values())
+
+    if min_price:
+        results = [s for s in results if s["price"] >= min_price]
+
+    if max_price:
+        results = [s for s in results if s["price"] <= max_price]
+
+    if name_contains:
+        results = [s for s in results if name_contains.lower() in s["name"].lower()]
+
+    return {
+        "count": len(results),
+        "results": results
+    }
+
+
+@app.get("/stocks/stats")
+async def get_stock_stats():
+    """获取股票统计信息"""
+    prices = [s["price"] for s in stocks_db.values()]
+    sectors = [s["sector"] for s in stocks_db.values()]
+
+    return {
+        "total_count": len(stocks_db),
+        "avg_price": sum(prices) / len(prices),
+        "max_price": max(prices),
+        "min_price": min(prices),
+        "sectors": list(set(sectors))
+    }
+
+
+# ============================================
+# 6. CRUD 操作 - 股票管理
 # ============================================
 
 @app.get("/stocks", response_model=List[Stock])
@@ -186,57 +233,6 @@ async def delete_stock(symbol: str):
         )
     del stocks_db[symbol]
     return None
-
-
-# ============================================
-# 6. 搜索功能
-# ============================================
-
-@app.get("/stocks/search")
-async def search_stocks(
-        min_price: Optional[float] = Query(None, ge=0, description="最低价格"),
-        max_price: Optional[float] = Query(None, le=10000, description="最高价格"),
-        name_contains: Optional[str] = Query(None, description="名称包含")
-):
-    """
-    搜索股票
-
-    - 支持价格范围和名称搜索
-    """
-    results = list(stocks_db.values())
-
-    if min_price:
-        results = [s for s in results if s["price"] >= min_price]
-
-    if max_price:
-        results = [s for s in results if s["price"] <= max_price]
-
-    if name_contains:
-        results = [s for s in results if name_contains.lower() in s["name"].lower()]
-
-    return {
-        "count": len(results),
-        "results": results
-    }
-
-
-# ============================================
-# 7. 统计接口
-# ============================================
-
-@app.get("/stocks/stats")
-async def get_stock_stats():
-    """获取股票统计信息"""
-    prices = [s["price"] for s in stocks_db.values()]
-    sectors = [s["sector"] for s in stocks_db.values()]
-
-    return {
-        "total_count": len(stocks_db),
-        "avg_price": sum(prices) / len(prices),
-        "max_price": max(prices),
-        "min_price": min(prices),
-        "sectors": list(set(sectors))
-    }
 
 
 # ============================================
