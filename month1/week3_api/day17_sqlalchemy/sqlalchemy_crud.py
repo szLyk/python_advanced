@@ -102,16 +102,32 @@ class StockHistory(Base):
 
 @contextmanager
 def get_db():
-    """获取数据库 Session（上下文管理器）"""
-    db = SessionLocal()
+    """
+    获取数据库 Session 的上下文管理器
+
+    使用方式:
+        with get_db() as db:
+            db.query(Stock).all()
+        # 出 with 块后自动 commit() 和 close()
+
+    执行流程:
+        ① 创建 Session → ② yield 交出控制权 → ③ with 块执行
+        → ④ 回到 yield 继续 → ⑤ commit/rollback → ⑥ close
+
+    异常处理:
+        - 正常：yield → commit → close
+        - 异常：yield → rollback → close → 抛出异常
+    """
+    db = SessionLocal()  # 【步骤 1】创建数据库会话连接
     try:
-        yield db
-        db.commit()
+        yield db  # 【步骤 2】把 db 交给 with 块使用，暂停在这里
+                  # 【步骤 4】with 块结束后，从这里继续执行
+        db.commit()  # 【步骤 5】提交事务（成功时执行）
     except Exception:
-        db.rollback()
-        raise
+        db.rollback()  # 【步骤 5】回滚事务（出错时执行）
+        raise  # 重新抛出异常，让调用者知道
     finally:
-        db.close()
+        db.close()  # 【步骤 6】关闭连接（无论成功失败都执行）
 
 
 def init_db():
