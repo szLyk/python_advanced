@@ -64,25 +64,27 @@ python_advanced/
 
 | 月份 | 目标 | 状态 |
 |------|------|------|
-| 第 1 月 | Python 提升 | 🔄 进行中 |
-| 第 2 月 | Agent 基础 | ⬜ 未开始 |
+| 第 1 月 | Python 提升 | ✅ 已完成 |
+| 第 2 月 | Agent 基础 | 🔄 进行中 (Week 5) |
 | 第 3 月 | 项目实战 | ⬜ 未开始 |
 | 第 4 月 | 求职投递 | ⬜ 未开始 |
 
 ### 当前任务
 
-**📅 Day 1: 装饰器**
+**📅 Week 5: LangChain 基础 | Day 30: Prompt 模板（进行中）**
 
-```bash
-# 运行学习示例
-python month1/week1_python_core/day1_decorator/decorator_practice.py
-```
+---
 
-学习要点：
-- [x] 装饰器本质理解
-- [ ] 带参数的装饰器
-- [ ] 类装饰器
-- [ ] functools.wraps
+### 已完成内容
+
+**Month 1: Python 核心提升 ✅**
+- Week 1: 装饰器、生成器、上下文管理器、异步编程 ✅
+- Week 2: NumPy、pandas 数据处理 ✅
+- Week 3: FastAPI、Pydantic、SQLAlchemy、JWT 认证 ✅
+- Week 4: AI 基础、Embedding、LLM API、股票分析系统 ✅
+
+**Month 2: LangChain + Agent 基础 🔄**
+- Week 5: LangChain 基础 (Day 29 完成，Day 30 进行中)
 
 ## 学习资源
 
@@ -117,4 +119,4 @@ python month1/week1_python_core/day1_decorator/decorator_practice.py
 
 **120 天后，你就是 AI Agent 工程师！加油！**
 
-*最后更新：2026-03-25*
+*最后更新：2026-04-14*

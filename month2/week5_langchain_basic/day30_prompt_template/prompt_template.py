@@ -8,7 +8,7 @@ Day 30: Prompt 模板
 - 掌握 Prompt 设计技巧
 """
 
-from langchain.prompts import PromptTemplate, FewShotPromptTemplate
+from langchain_core.prompts import PromptTemplate, FewShotPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from config import create_llm
 
